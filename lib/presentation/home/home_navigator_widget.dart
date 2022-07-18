@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:private_fit/application/bot_nav_bar/bloc/bot_nav_bar_bloc.dart';
 import 'package:private_fit/injections.dart';
 import 'package:private_fit/l10n/l10n.dart';
+import 'package:private_fit/presentation/activity_tracker/activity_tracker_page.dart';
 import 'package:private_fit/presentation/home/home_page.dart';
 import 'package:private_fit/presentation/home/widgets/bot_nav_bar.dart';
 import 'package:private_fit/presentation/open_food/scanner_page.dart';
@@ -43,15 +44,7 @@ class HomeNavigatorWidget extends StatelessWidget {
           body: i == 0
               ? const HomePage()
               : i == 1
-                  ? Container(
-                      color: Colors.white,
-                      child: const Center(
-                        child: Text(
-                          'Training',
-                          style: TextStyle(fontSize: 40.5),
-                        ),
-                      ),
-                    )
+                  ? const ActivityTrackerPage()
                   : i == 2
                       ? const ScannerPage()
                       : i == 3
