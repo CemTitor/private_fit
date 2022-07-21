@@ -3,6 +3,6 @@ import 'package:private_fit/domain/activity_tracker/activity_tracker_failures.da
 import 'package:private_fit/domain/activity_tracker/activity_tracker_fetched_step.dart';
 
 abstract class IActivityTrackerFacade {
-  Future<Either<ActivityTrackerFailures, Unit>> justplaceholder();
+  Future<Either<ActivityTrackerFailures, Unit>> justPlaceHolder();
   Future<Either<ActivityTrackerFailures, FetchedStep>> getFetchedStep();
 }

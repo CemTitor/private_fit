@@ -38,6 +38,10 @@ class ActivityTrackerView extends StatelessWidget {
                       size: 75,
                     ),
                   ),
+                  Text(
+                    '${value.fetchedStep.step} Steps',
+                    style: TextStyle(fontSize: 50),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -47,7 +51,6 @@ class ActivityTrackerView extends StatelessWidget {
                           child: Icon(Icons.local_fire_department_rounded)),
                     ],
                   ),
-                  Text('${value.fetchedStep.step} Steps'),
                 ],
               ),
             );

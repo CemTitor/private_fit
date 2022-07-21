@@ -14,7 +14,6 @@ import 'package:health/health.dart';
 @LazySingleton(as: IActivityTrackerFacade)
 class ActivityTrackerServices extends IActivityTrackerFacade {
   HealthFactory health = HealthFactory();
-  // int _nofSteps = 0;
 
   final AtSignLogger _logger = AtSignLogger('ActivityTrackerServices');
 
@@ -40,59 +39,33 @@ class ActivityTrackerServices extends IActivityTrackerFacade {
   }
 
   @override
-  Future<Either<ActivityTrackerFailures, Unit>> justplaceholder() {
+  Future<Either<ActivityTrackerFailures, Unit>> justPlaceHolder() {
     throw UnimplementedError();
   }
 
   @override
   Future<Either<ActivityTrackerFailures, FetchedStep>> getFetchedStep() async {
-    // int? steps;
-
     // get steps for today (i.e., since midnight)
     final now = DateTime.now();
     final midnight = DateTime(now.year, now.month, now.day);
 
     bool requested = await health.requestAuthorization([HealthDataType.STEPS]);
 
-    int? steps = 0;
+    int? steps;
 
     if (requested) {
       try {
+        ///try below code when step number is 0.
+        // steps = (steps == null)? 0 : await health.getTotalStepsInInterval(midnight, now);
         steps = await health.getTotalStepsInInterval(midnight, now);
-        // return right(FetchedStep(steps!));
+        return right(FetchedStep(steps!));
       } catch (error) {
-        print("Caught exception in getTotalStepsInInterval: $error");
-        // return left(const ActivityTrackerFailures.internetError());
-
+        print('Caught exception in getTotalStepsInInterval: $error');
+        return left(const ActivityTrackerFailures.internetError());
       }
-
-      // print('Total number of steps: $steps');
-      // _nofSteps = (steps == null) ? 0 : steps;
-      // _state = (steps == null) ? AppState.NO_DATA : AppState.STEPS_READY;
-      // interneterror // okey
     } else {
-      print("Authorization not granted - error in authorization");
-      // return left(const ActivityTrackerFailures.failedToGetPermissions());
+      print('Authorization not granted - error in authorization');
+      return left(const ActivityTrackerFailures.failedToGetPermissions());
     }
-
-    // final ProductResult result;
-    // try {
-    //   result = await OpenFoodAPIClient.getProduct(configuration);
-    // } catch (e) {
-    //   return left(const ActivityTrackerFailures.internetError());
-    // }
-
-    if (steps != null) {
-      // await daoProduct.put(product);
-      _logger.info('Successful got the Product associated with the Barcode');
-      return right(FetchedStep(steps));
-    }
-
-    // }
-    // if (barcode.trim().isNotEmpty &&
-    //     (result.barcode == null || result.barcode!.isEmpty)) {
-    //   return left(const ActivityTrackerFailures.codeInvalid());
-    // }
-    return left(const ActivityTrackerFailures.internetNotFound());
   }
 }
