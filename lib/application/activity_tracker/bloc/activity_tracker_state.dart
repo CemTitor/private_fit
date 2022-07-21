@@ -10,3 +10,7 @@ class ActivityTrackerState with _$ActivityTrackerState {
   const factory ActivityTrackerState.loadSuccess(FetchedStep fetchedStep) =
       _LoadSuccess;
 }
+// void onPedestrianStatusChanged(PedestrianStatus event) {
+//   print(event);
+//   _status = event.status;
+// }

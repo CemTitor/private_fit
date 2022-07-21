@@ -31,7 +31,7 @@ import 'domain/on_boarding/use_cases/on_board_data_when_succesful_use_case.dart'
 import 'domain/on_boarding/use_cases/on_boarding_use_cases.dart' as _i18;
 import 'domain/open_food/i_open_food_facts_facade.dart' as _i13;
 import 'domain/open_food/use_cases/get_fetched_food_use_case.dart' as _i23;
-import 'infrastructure/activity_tracker/activity_tracker_services.dart' as _i6;
+import 'infrastructure/activity_tracker/activity_tracker_services2.dart' as _i6;
 import 'infrastructure/contacts/contacts_facade.dart' as _i10;
 import 'infrastructure/home/home_facade.dart' as _i12;
 import 'infrastructure/on_boarding/onboarding_atsign_facade.dart' as _i8;

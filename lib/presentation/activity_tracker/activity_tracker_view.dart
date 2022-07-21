@@ -99,6 +99,8 @@ class OnFailures extends StatelessWidget {
             internetError: (_) => 'internetError',
             userCancelled: (_) => 'userCancelled',
             codeInvalid: (_) => 'codeInvalid',
+            onPedestrianStatusError: (_) => 'Pedestrian Status not available',
+            onStepCountError: (_) => 'Step Count not available',
           ),
         ),
       ),

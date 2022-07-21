@@ -10,4 +10,7 @@ class ActivityTrackerFailures with _$ActivityTrackerFailures {
   const factory ActivityTrackerFailures.internetError() = _InternetError;
   const factory ActivityTrackerFailures.userCancelled() = _UserCancelled;
   const factory ActivityTrackerFailures.codeInvalid() = _codeInvalid;
+  const factory ActivityTrackerFailures.onPedestrianStatusError() =
+      _onPedestrianStatusError;
+  const factory ActivityTrackerFailures.onStepCountError() = _onStepCountError;
 }
