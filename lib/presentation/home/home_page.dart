@@ -24,16 +24,17 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        extendedIconLabelSpacing: 16,
-        icon: const Icon(Icons.edit),
-        label: const Text('New activity'),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {},
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(12),
+      //   ),
+      //   extendedIconLabelSpacing: 16,
+      //   icon: const Icon(Icons.edit),
+      //   label: const Text('New activity'),
+      // ),
       body: BlocConsumer<HomeBloc, HomeState>(
         bloc: getIt<HomeBloc>(),
         listener: (context, state) {

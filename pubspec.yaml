@@ -107,6 +107,8 @@ flutter:
     - assets/images/
     - assets/images/
     - assets/images/
+    #### ActivityIcon
+    - assets/icons/pngs/activities/
     #### Curved
     - assets/icons/svgs/curved/Activity.svg
     - assets/icons/svgs/curved/AddUser.svg

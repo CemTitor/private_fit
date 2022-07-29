@@ -35,7 +35,7 @@ class Keys {
     ),
   );
 
-  /// User name key
+  /// Menstural data key
   static final PassKey menstrualDataKey = PassKey(
     key: 'menstrual',
     isPublic: false,
@@ -45,6 +45,18 @@ class Keys {
       labelName: 'period',
       isHidden: true,
       type: 'menstrual',
+    ),
+  );
+
+  /// Activity data key
+  static final PassKey activityDataKey = PassKey(
+    key: 'activity',
+    isPublic: false,
+    isHidden: true,
+    createdDate: DateTime.now(),
+    value: Value(
+      labelName: 'activity',
+      isHidden: true,
     ),
   );
 

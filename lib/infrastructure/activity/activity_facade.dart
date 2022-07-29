@@ -5,41 +5,41 @@ import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_utils/at_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:private_fit/domain/activity/activity_data_model.dart';
+import 'package:private_fit/domain/activity/i_activity_facade.dart';
 import 'package:private_fit/domain/core/at_platform_failures.dart';
 import 'package:private_fit/domain/core/key_model.dart';
 import 'package:private_fit/domain/core/keys.dart';
 import 'package:private_fit/domain/core/value_model.dart';
-import 'package:private_fit/domain/menstrual/i_menstrual_facade.dart';
-import 'package:private_fit/domain/menstrual/menstrual_data_model.dart';
+import 'package:private_fit/infrastructure/activity/activity_dto.dart';
 import 'package:private_fit/infrastructure/atplatform/platform_services.dart';
-import 'package:private_fit/infrastructure/menstrual/mentrual_dto.dart';
 import 'package:private_fit/shared/constants.dart';
 
-@LazySingleton(as: IMenstrualFacade)
-class MenstrualFacade implements IMenstrualFacade {
+@LazySingleton(as: IActivityFacade)
+class ActivityFacade implements IActivityFacade {
   AtClientManager atClientManager = AtClientManager.getInstance();
   final SdkServices _sdkServices = SdkServices.getInstance();
   final AtSignLogger _logger = AtSignLogger('Settings facade');
 
   @override
-  Future<Either<AtPlatformFailure, Unit>> saveMenstraulData(
-    MenstrualDataModel menstrualDataModel,
+  Future<Either<AtPlatformFailure, Unit>> saveActivityData(
+    ActivityDataModel activityDataModel,
   ) async {
-    _logger.info('----Saving menstrual data--------');
+    _logger.info('----Saving activity data--------');
 
-    final _menstrualDataDto = MenstrualDto.fromDomain(menstrualDataModel);
-    final _menstrualDataKey = Keys.menstrualDataKey
+    final _activityDataDto = ActivityDto.fromDomain(activityDataModel);
+    final _activityDataKey = Keys.activityDataKey
       ..sharedWith = atClientManager.atClient.getCurrentAtSign()
       ..sharedBy = atClientManager.atClient.getCurrentAtSign()
       ..value = Value(
-        value: _menstrualDataDto.toJson(),
+        value: _activityDataDto.toJson(),
         type: 'username',
         labelName: 'User name',
       );
 
     try {
-      _logger.info('Setting a username $menstrualDataModel');
-      await _sdkServices.put(_menstrualDataKey);
+      _logger.info('Setting a username $activityDataModel');
+      await _sdkServices.put(_activityDataKey);
 
       return right(unit);
     } catch (e) {
@@ -48,11 +48,11 @@ class MenstrualFacade implements IMenstrualFacade {
   }
 
   @override
-  Future<Option<MenstrualDataModel>> getMenstraulData() async {
-    _logger.info('----getting menstrual data--------');
+  Future<Option<ActivityDataModel>> getActivityData() async {
+    _logger.info('----getting activity data--------');
 
     return getAllKeys(
-      regex: '${Keys.menstrualDataKey.key}.${Constants.appNamespace}',
+      regex: '${Keys.activityDataKey.key}.${Constants.appNamespace}',
     ).then(
       (value) => get(PassKey.fromAtKey(value.first)).then((value) {
         return value.fold(
@@ -60,7 +60,7 @@ class MenstrualFacade implements IMenstrualFacade {
           (r) {
             final d = jsonDecode(r.value as String)['value'];
             return some(
-              MenstrualDto.fromJson(d as Map<String, dynamic>).toDomain(),
+              ActivityDto.fromJson(d as Map<String, dynamic>).toDomain(),
             );
           },
         );
